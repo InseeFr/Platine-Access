@@ -45,7 +45,7 @@ const Auth = ({ urlBackEnd, urlMySurveys, id, history, keycloakAuth }) => {
 
   const redirectToQuestionnaire = useCallback(() => {
     redirectToUrl(urlMySurveys);
-  }, []);
+  }, [urlMySurveys]);
 
   useEffect(() => {
     if (authenticated && !loading) redirectToQuestionnaire();
