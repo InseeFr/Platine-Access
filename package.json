@@ -1,6 +1,6 @@
 {
   "name": "colempub",
-  "version": "1.0.2",
+  "version": "1.0.10",
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^3.3.7",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
