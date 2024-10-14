@@ -1,6 +1,6 @@
 export const idecLengthMin = 7;
 
-export const idecLengthMax = 8;
+export const idecLengthMax = 9;
 
 export const LONGUEUR_MINIMALE_PASSWORD_POLITIQUE_INSEE = 8;
 
