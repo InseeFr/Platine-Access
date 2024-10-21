@@ -10,7 +10,6 @@ import { ContentSurvey } from "types/ContentSurvey";
 import { useFetchQueryPortail } from "hooks/useFetchQuery";
 import { Loading } from "./Loading";
 import { APISchemas } from "types/apiPortail";
-import { useOidc } from "hooks/useAuth";
 
 type Props = {
   survey: ContentSurvey;
@@ -68,7 +67,7 @@ export const SurveyHomepage = ({ survey }: Props) => {
         />
       </div>
       <div className="fr-container">
-        <LoginSection className={"fr-hidden-md fr-my-2w"} data={data} />
+        <LoginSection className={"fr-hidden-md fr-my-2w"} data={data} surveyId={survey.id} />
       </div>
       <SideMenuCustom
         surveyId={survey.id}
@@ -83,18 +82,25 @@ export const SurveyHomepage = ({ survey }: Props) => {
             className={"fr-hidden fr-unhidden-md  fr-col-12 fr-col-md-3 fr-grid-row"}
           />
           <Outlet />
-          <LoginSection data={data} />
+          <LoginSection data={data} surveyId={survey.id} />
         </div>
       </div>
     </>
   );
 };
 
-const LoginSection = ({ className, data }: { className?: string; data: APISchemas["SurveyStatus"] }) => {
+const LoginSection = ({
+  className,
+  data,
+  surveyId,
+}: {
+  className?: string;
+  data: APISchemas["SurveyStatus"];
+  surveyId: string;
+}) => {
   const { t } = useTranslation("SurveyHomepage");
   const { t: headerTranslation } = useTranslation("Header");
   const { cx } = useStyles();
-  const { login } = useOidc();
 
   return (
     <div className={cx(className, "fr-col-12", "fr-col-md-3 , fr-grid-row")}>
@@ -103,13 +109,18 @@ const LoginSection = ({ className, data }: { className?: string; data: APISchema
       </div>
       <div className={"fr-col-md-11 fr-col-12"}>
         <h4>{t("respond to survey")}</h4>
-        {!data.opened ? (
+        {data.opened ? (
           <>
             <p className={"fr-hidden fr-unhidden-md"}>{t("respond to survey detail")}</p>
             <p className={"fr-hidden-md fr-text--sm"}>{t("respond to survey detail")}</p>
             <div className="fr-grid-row ">
               <Button
-                onClick={() => login && login({ doesCurrentHrefRequiresAuth: false })}
+                linkProps={{
+                  to: "/$survey/login",
+                  params: {
+                    survey: surveyId,
+                  },
+                }}
                 className={"fr-col-12 fr-grid-row fr-grid-row--center "}
               >
                 {headerTranslation("login")}
