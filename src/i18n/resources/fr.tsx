@@ -252,6 +252,12 @@ export const translations: Translations<"fr"> = {
       "Ces informations personnelles sont issues des fichiers administratifs. Elles sont  protégées par la loi ; leur utilisation relève de l’exercice des  missions de service public de l’Insee. ",
     "link": "En savoir plus",
     "openNewWindow": "ouvre une nouvelle fenêtre",
+    "unknownEmailFormtitle": "Veuillez renseigner votre adresse de messagerie",
+    "knownEmailFormtitle": "Veuillez confirmer votre adresse de messagerie",
+    "email": "Adresse de messagerie",
+    "confirmEmail": "Confirmer votre adresse de messagerie",
+    "submitUnknownEmailForm": "Valider et accéder à l'enquête",
+    "submitKnownEmailForm": "Confirmer et accéder à l'enquête",
   },
   /* spell-checker: enable */
 };

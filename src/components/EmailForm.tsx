@@ -7,14 +7,25 @@ import content from "resources/content.json";
 import { UnknownEmailForm } from "./UnknownEmailForm";
 import { KnownEmailForm } from "./KnownEmailForm";
 import Divider from "@mui/material/Divider";
+import { Loading } from "./surveyHomepage/Loading";
 
 export const EmailForm = ({ surveyId }: { surveyId: string }) => {
   const { t } = useTranslation("EmailForm");
   const titleShort = content.specifique.find(s => s.id === surveyId)?.titleShort;
 
-  const { data: email } = useFetchQueryPortail("/repondant/mail");
+  const { data: questioningUrlData, isLoading } = useFetchQueryPortail("/questionnaires-url");
+  const questioningUrl = questioningUrlData && questioningUrlData[0].url;
 
-  const unknownEmail = !email || email === "";
+  // const { data: email } = useFetchQueryPortail("/repondant/mail");
+  // const unknownEmail = !email || email === "";
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  // TODO remove when get email data
+  const unknownEmail = true;
+  const email = "toto@insee.fr";
 
   return (
     <div className={"fr-container"}>
@@ -43,7 +54,11 @@ export const EmailForm = ({ surveyId }: { surveyId: string }) => {
         >
           <div className="fr-grid-row  fr-grid-row--center fr-py-md-7w fr-py-3w">
             <div className="fr-col-11 fr-col-md-9 ">
-              {unknownEmail ? <UnknownEmailForm /> : <KnownEmailForm />}
+              {unknownEmail ? (
+                <UnknownEmailForm questioningUrl={questioningUrl} />
+              ) : (
+                <KnownEmailForm questioningUrl={questioningUrl} email={email} />
+              )}
               <Divider orientation="horizontal" variant="fullWidth" className="fr-p-0 fr-my-3w" />
               <p>{t("contactDetailsInformation")}</p>
               <p>{t("personalInformations")}</p>
@@ -64,7 +79,17 @@ export const EmailForm = ({ surveyId }: { surveyId: string }) => {
 };
 
 const { i18n } = declareComponentKeys<
-  "connexion" | "contactDetailsInformation" | "personalInformations" | "link" | "openNewWindow"
+  | "connexion"
+  | "contactDetailsInformation"
+  | "personalInformations"
+  | "link"
+  | "openNewWindow"
+  | "unknownEmailFormtitle"
+  | "email"
+  | "confirmEmail"
+  | "submitUnknownEmailForm"
+  | "knownEmailFormtitle"
+  | "submitKnownEmailForm"
 >()("EmailForm");
 
 export type I18n = typeof i18n;

@@ -7,9 +7,6 @@ import Divider from "@mui/material/Divider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { ContentSurvey } from "types/ContentSurvey";
-import { useFetchQueryPortail } from "hooks/useFetchQuery";
-import { Loading } from "./Loading";
-import { APISchemas } from "types/apiPortail";
 
 type Props = {
   survey: ContentSurvey;
@@ -17,16 +14,6 @@ type Props = {
 
 export const SurveyHomepage = ({ survey }: Props) => {
   const { t } = useTranslation("SurveyHomepage");
-
-  const { data, isLoading } = useFetchQueryPortail("/is-survey-online/{id}", {
-    urlParams: {
-      id: survey.id,
-    },
-  });
-
-  if (!data || isLoading) {
-    return <Loading />;
-  }
 
   return (
     <>
@@ -67,22 +54,22 @@ export const SurveyHomepage = ({ survey }: Props) => {
         />
       </div>
       <div className="fr-container">
-        <LoginSection className={"fr-hidden-md fr-my-2w"} data={data} surveyId={survey.id} />
+        <LoginSection className={"fr-hidden-md fr-my-2w"} data={survey} surveyId={survey.id} />
       </div>
       <SideMenuCustom
         surveyId={survey.id}
-        data={data}
+        isSurveyOnline={survey.isSurveyOnline}
         className={"fr-hidden-md fr-mt-3w fr-mx-2w  fr-col-md-3 "}
       />
       <div className="fr-container">
         <div id="content" className={"fr-grid-row fr-py-md-7w fr-py-2w "}>
           <SideMenuCustom
             surveyId={survey.id}
-            data={data}
+            isSurveyOnline={survey.isSurveyOnline}
             className={"fr-hidden fr-unhidden-md  fr-col-12 fr-col-md-3 fr-grid-row"}
           />
           <Outlet />
-          <LoginSection data={data} surveyId={survey.id} />
+          <LoginSection data={survey} surveyId={survey.id} />
         </div>
       </div>
     </>
@@ -95,7 +82,7 @@ const LoginSection = ({
   surveyId,
 }: {
   className?: string;
-  data: APISchemas["SurveyStatus"];
+  data: ContentSurvey;
   surveyId: string;
 }) => {
   const { t } = useTranslation("SurveyHomepage");
@@ -109,7 +96,7 @@ const LoginSection = ({
       </div>
       <div className={"fr-col-md-11 fr-col-12"}>
         <h4>{t("respond to survey")}</h4>
-        {data.opened ? (
+        {data.isSurveyOnline ? (
           <>
             <p className={"fr-hidden fr-unhidden-md"}>{t("respond to survey detail")}</p>
             <p className={"fr-hidden-md fr-text--sm"}>{t("respond to survey detail")}</p>
@@ -144,11 +131,11 @@ const LoginSection = ({
 
 const SideMenuCustom = ({
   className,
-  data,
+  isSurveyOnline,
   surveyId,
 }: {
   className?: string;
-  data: APISchemas["SurveyStatus"];
+  isSurveyOnline: boolean;
   surveyId: string;
 }) => {
   const { t } = useTranslation("SurveyHomepage");
@@ -219,7 +206,7 @@ const SideMenuCustom = ({
         id="sideMenu"
         burgerMenuButtonText={t("in this section")}
         items={
-          data.opened
+          isSurveyOnline
             ? [
                 ...sideMenuItems,
                 {
