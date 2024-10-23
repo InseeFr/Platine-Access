@@ -178,14 +178,13 @@ export const supportSchema = z
     }
   });
 
-  export const unknownEmailForm = z
+export const unknownEmailForm = z
   .object({
     mailaddress: z.string().min(1, { message: "emailRequired" }).email({ message: "invalidEmail" }),
     mailaddressConfirmation: z
       .string()
       .min(1, { message: "emailRequired" })
       .email({ message: "invalidEmail" }),
-    
   })
   .superRefine(({ mailaddress, mailaddressConfirmation }, refinementContext) => {
     if (mailaddress !== mailaddressConfirmation) {
@@ -197,9 +196,6 @@ export const supportSchema = z
     }
   });
 
-export const knownEmailForm = z
-  .object({
-    mailaddress: z.string().min(1, { message: "emailRequired" }).email({ message: "invalidEmail" }),
-  })
- 
-  
+export const knownEmailForm = z.object({
+  mailaddress: z.string().min(1, { message: "emailRequired" }).email({ message: "invalidEmail" }),
+});

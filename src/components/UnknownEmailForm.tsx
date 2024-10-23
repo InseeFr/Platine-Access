@@ -1,23 +1,28 @@
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Input } from "@codegouvfr/react-dsfr/Input";
-import { Navigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useFetchMutationPortail } from "hooks/useFetchQuery";
 import { useForm } from "hooks/useForm";
 import { useTranslation } from "i18n/i18n";
 import { useEffect } from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { unknownEmailForm } from "types/schemas";
+import { Schema, z } from "zod";
 
 export const UnknownEmailForm = ({ questioningUrl }: { questioningUrl?: string }) => {
   const { t } = useTranslation("EmailForm");
+  const navigate = useNavigate();
   const { t: supportFormTranslation } = useTranslation("SupportForm");
   const { register, errors, handleSubmit } = useForm(unknownEmailForm);
 
   const { mutateAsync, isSuccess } = useFetchMutationPortail("/repondant/mail", "put");
 
   useEffect(() => {
-    if (isSuccess) {
-      // Todo: change navigate url
-      questioningUrl ? (window.location.href = questioningUrl) : <Navigate to={"/"} />;
+    if (isSuccess && questioningUrl) {
+      window.location.href = questioningUrl;
+    }
+    if (isSuccess && !questioningUrl) {
+      navigate({ to: "/" });
     }
   }, [isSuccess]);
 
@@ -31,22 +36,7 @@ export const UnknownEmailForm = ({ questioningUrl }: { questioningUrl?: string }
     <div>
       <h4>{t("unknownEmailFormtitle")}</h4>
       <form action="#" onSubmit={onSubmit}>
-        <Input
-          label={t("email")}
-          nativeInputProps={{
-            autoComplete: "email",
-            type: "email",
-            ...register("mailaddress"),
-            id: "email",
-            ...(errors.mailaddress && { "aria-invalid": true, "aria-errormessage": "email-desc-error" }),
-          }}
-          state={errors.mailaddress ? "error" : "default"}
-          stateRelatedMessage={
-            errors.mailaddress?.message &&
-            supportFormTranslation(errors.mailaddress?.message as keyof typeof supportFormTranslation)
-          }
-        />
-        {!errors.mailaddress && <p className="fr-hidden" id={"email-desc-error"} />}
+        <EmailInput register={register} errors={errors} />
         <Input
           label={t("confirmEmail")}
           nativeInputProps={{
@@ -73,5 +63,39 @@ export const UnknownEmailForm = ({ questioningUrl }: { questioningUrl?: string }
         </Button>
       </form>
     </div>
+  );
+};
+
+type Props = {
+  register: UseFormRegister<z.TypeOf<Schema>>;
+  errors: FieldErrors<{
+    mailaddress: string;
+    mailaddressConfirmation: string;
+  }>;
+};
+
+export const EmailInput = ({ register, errors }: Props) => {
+  const { t } = useTranslation("EmailForm");
+  const { t: supportFormTranslation } = useTranslation("SupportForm");
+
+  return (
+    <>
+      <Input
+        label={t("email")}
+        nativeInputProps={{
+          autoComplete: "email",
+          type: "email",
+          ...register("mailaddress"),
+          id: "email",
+          ...(errors.mailaddress && { "aria-invalid": true, "aria-errormessage": "email-desc-error" }),
+        }}
+        state={errors.mailaddress ? "error" : "default"}
+        stateRelatedMessage={
+          errors.mailaddress?.message &&
+          supportFormTranslation(errors.mailaddress?.message as keyof typeof supportFormTranslation)
+        }
+      />
+      {!errors.mailaddress && <p className="fr-hidden" id={"email-desc-error"} />}
+    </>
   );
 };
