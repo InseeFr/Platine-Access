@@ -36,6 +36,8 @@ export const KnownEmailForm = ({
       mutateAsync({
         body: data.mailaddress,
       });
+    } else {
+      questioningUrl ? (window.location.href = questioningUrl) : navigate({ to: "/" });
     }
   });
 

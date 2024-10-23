@@ -14,18 +14,16 @@ export const EmailForm = ({ surveyId }: { surveyId: string }) => {
   const titleShort = content.specifique.find(s => s.id === surveyId)?.titleShort;
 
   const { data: questioningUrlData, isLoading } = useFetchQueryPortail("/questionnaires-url");
+
   const questioningUrl = questioningUrlData && questioningUrlData[0].url;
 
-  // const { data: email } = useFetchQueryPortail("/repondant/mail");
-  // const unknownEmail = !email || email === "";
+  const { data: emailData, isLoading: isLoadingEmailData } = useFetchQueryPortail("/user/mail");
 
-  if (isLoading) {
+  if (isLoading || isLoadingEmailData) {
     return <Loading />;
   }
 
-  // TODO remove when get email data
-  const unknownEmail = true;
-  const email = "toto@insee.fr";
+  const unknownEmail = !emailData || emailData.mail === "" || emailData.mail === undefined;
 
   return (
     <div className={"fr-container"}>
@@ -57,7 +55,7 @@ export const EmailForm = ({ surveyId }: { surveyId: string }) => {
               {unknownEmail ? (
                 <UnknownEmailForm questioningUrl={questioningUrl} />
               ) : (
-                <KnownEmailForm questioningUrl={questioningUrl} email={email} />
+                <KnownEmailForm questioningUrl={questioningUrl} email={emailData.mail!} />
               )}
               <Divider orientation="horizontal" variant="fullWidth" className="fr-p-0 fr-my-3w" />
               <p>{t("contactDetailsInformation")}</p>
