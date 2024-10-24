@@ -257,6 +257,7 @@ export const translations: Translations<"en"> = {
     "confirmEmail": "Confirm your email address",
     "submitUnknownEmailForm": "Validate and access the survey",
     "submitKnownEmailForm": "Confirm and access the survey",
+    "pageTitle": "Authentication",
   },
   /* spell-checker: enable */
 };

@@ -258,6 +258,7 @@ export const translations: Translations<"fr"> = {
     "confirmEmail": "Confirmer votre adresse de messagerie",
     "submitUnknownEmailForm": "Valider et accéder à l'enquête",
     "submitKnownEmailForm": "Confirmer et accéder à l'enquête",
+    "pageTitle": "Authentification",
   },
   /* spell-checker: enable */
 };

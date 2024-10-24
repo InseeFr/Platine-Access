@@ -17,7 +17,7 @@ function Index() {
 
   const currentPath = router.history.location.pathname;
 
-  const hasNotOutlet =
+  const hasNotSideMenu =
     currentPath.includes("/repondant/mail") ||
     currentPath.includes("/assistance") ||
     currentPath.includes("/login");
@@ -26,7 +26,7 @@ function Index() {
     return <NotFound />;
   }
 
-  if (hasNotOutlet) {
+  if (hasNotSideMenu) {
     return <Outlet />;
   }
   return (

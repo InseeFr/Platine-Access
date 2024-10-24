@@ -60,6 +60,7 @@ export const SurveyHomepage = ({ survey }: Props) => {
         surveyId={survey.id}
         isSurveyOnline={survey.isSurveyOnline}
         className={"fr-hidden-md fr-mt-3w fr-mx-2w  fr-col-md-3 "}
+        labelId="mobileSideMenu"
       />
       <div className="fr-container">
         <div id="content" className={"fr-grid-row fr-py-md-7w fr-py-2w "}>
@@ -67,6 +68,7 @@ export const SurveyHomepage = ({ survey }: Props) => {
             surveyId={survey.id}
             isSurveyOnline={survey.isSurveyOnline}
             className={"fr-hidden fr-unhidden-md  fr-col-12 fr-col-md-3 fr-grid-row"}
+            labelId="desktopSideMenu"
           />
           <Outlet />
           <LoginSection data={survey} surveyId={survey.id} />
@@ -133,10 +135,12 @@ const SideMenuCustom = ({
   className,
   isSurveyOnline,
   surveyId,
+  labelId,
 }: {
   className?: string;
   isSurveyOnline: boolean;
   surveyId: string;
+  labelId: string;
 }) => {
   const { t } = useTranslation("SurveyHomepage");
   const { t: supportTranslation } = useTranslation("Support");
@@ -197,13 +201,13 @@ const SideMenuCustom = ({
 
   return (
     <>
-      <label className="fr-sr-only" id={"sideMenu-title"}>
+      <label className="fr-sr-only" id={`${labelId}-title`}>
         {t("sideMenuTitle")}
       </label>
       <SideMenu
         className={className}
         align="left"
-        id="sideMenu"
+        id={labelId}
         burgerMenuButtonText={t("in this section")}
         items={
           isSurveyOnline

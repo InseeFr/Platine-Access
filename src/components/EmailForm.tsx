@@ -88,6 +88,7 @@ const { i18n } = declareComponentKeys<
   | "submitUnknownEmailForm"
   | "knownEmailFormtitle"
   | "submitKnownEmailForm"
+  | "pageTitle"
 >()("EmailForm");
 
 export type I18n = typeof i18n;
