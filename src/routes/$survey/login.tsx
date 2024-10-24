@@ -5,11 +5,11 @@ import { protectedLoader } from "hooks/useAuth";
 import content from "resources/content.json";
 
 export const Route = createFileRoute("/$survey/login")({
-  component: Index,
+  component: LoginPage,
   beforeLoad: protectedLoader,
 });
 
-function Index() {
+function LoginPage() {
   const { survey } = Route.useParams();
   const surveyData = content.specifique.find(s => s.id === survey);
 

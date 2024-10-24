@@ -5,11 +5,11 @@ import { useTranslation } from "i18n/i18n";
 import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/$survey/repondant/mail")({
-  component: Index,
+  component: MailPage,
   beforeLoad: protectedLoader,
 });
 
-function Index() {
+function MailPage() {
   const { survey } = Route.useParams();
   const { t: headerTranslation } = useTranslation("Header");
   const { t } = useTranslation("EmailForm");
