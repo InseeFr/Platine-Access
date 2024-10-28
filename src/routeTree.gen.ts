@@ -16,6 +16,7 @@ import { Route as MesEnquetesImport } from './routes/mes-enquetes'
 import { Route as MentionsLegalesImport } from './routes/mentions-legales'
 import { Route as DeconnexionImport } from './routes/deconnexion'
 import { Route as ConnexionImport } from './routes/connexion'
+import { Route as AccessibiliteImport } from './routes/accessibilite'
 import { Route as SurveyImport } from './routes/$survey'
 import { Route as IndexImport } from './routes/index'
 import { Route as SurveyIndexImport } from './routes/$survey/index'
@@ -54,6 +55,11 @@ const DeconnexionRoute = DeconnexionImport.update({
 
 const ConnexionRoute = ConnexionImport.update({
   path: '/connexion',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AccessibiliteRoute = AccessibiliteImport.update({
+  path: '/accessibilite',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -139,6 +145,13 @@ declare module '@tanstack/react-router' {
       path: '/$survey'
       fullPath: '/$survey'
       preLoaderRoute: typeof SurveyImport
+      parentRoute: typeof rootRoute
+    }
+    '/accessibilite': {
+      id: '/accessibilite'
+      path: '/accessibilite'
+      fullPath: '/accessibilite'
+      preLoaderRoute: typeof AccessibiliteImport
       parentRoute: typeof rootRoute
     }
     '/connexion': {
@@ -274,6 +287,7 @@ export const routeTree = rootRoute.addChildren({
     SurveyIndexRoute,
     SurveyRepondantMailRoute,
   }),
+  AccessibiliteRoute,
   ConnexionRoute,
   DeconnexionRoute,
   MentionsLegalesRoute,
@@ -291,6 +305,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/$survey",
+        "/accessibilite",
         "/connexion",
         "/deconnexion",
         "/mentions-legales",
@@ -315,6 +330,9 @@ export const routeTree = rootRoute.addChildren({
         "/$survey/",
         "/$survey/repondant/mail"
       ]
+    },
+    "/accessibilite": {
+      "filePath": "accessibilite.tsx"
     },
     "/connexion": {
       "filePath": "connexion.tsx"

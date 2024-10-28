@@ -1,6 +1,6 @@
 import type { GenericTranslations } from "i18nifty";
 
-//List the languages you with to support
+//List the languages with support
 export const languages = ["en", "fr"] as const;
 
 //If the user's browser language doesn't match any
@@ -28,7 +28,8 @@ export type ComponentKey =
   | import("components/errorPages/NotFound").I18n
   | import("components/errorPages/TechnicalError").I18n
   | import("components/errorPages/ErrorPages").I18n
-  | import("components/EmailForm").I18n;
+  | import("components/EmailForm").I18n
+  | import("components/Accessibility").I18n;
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,
