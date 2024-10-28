@@ -1,6 +1,7 @@
 import { fr } from "@codegouvfr/react-dsfr";
 import { Alert } from "@codegouvfr/react-dsfr/Alert";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
+import Button from "@codegouvfr/react-dsfr/Button";
 import { Loading } from "components/surveyHomepage/Loading";
 import { declareComponentKeys, useTranslation } from "i18n/i18n";
 import content from "resources/content.json";
@@ -42,7 +43,31 @@ export const ErrorPage = ({ data, message }: Props) => {
           <div className="fr-grid-row  fr-grid-row--center fr-py-md-7w fr-py-3w">
             <Alert
               className="fr-col-11 fr-col-md-8"
-              description={t("description", { message: message, surveyId: data.id })}
+              description={
+                <p className="fr-text--sm">
+                  {message}
+                  <br />
+                  {t("alertText")}
+                  <Button
+                    className="fr-pl-1v fr-text--sm"
+                    style={{
+                      padding: 0,
+                      display: "inline",
+                      textDecoration: "underline",
+                      fontWeight: "400",
+                    }}
+                    priority="tertiary no outline"
+                    linkProps={{
+                      to: "/$survey/contacter-assistance",
+                      params: {
+                        survey: data.id,
+                      },
+                    }}
+                  >
+                    {t("contactSupport")}
+                  </Button>
+                </p>
+              }
               severity="error"
               title={t("alertTitle")}
             />
@@ -73,10 +98,8 @@ export const Unauthorized = ({ surveyId }: { surveyId: string }) => {
   return <ErrorPage data={data} message={message} />;
 };
 
-const { i18n } = declareComponentKeys<
-  | "connexion"
-  | "alertTitle"
-  | { K: "description"; P: { message: string; surveyId: string }; R: JSX.Element }
->()("ErrorPages");
+const { i18n } = declareComponentKeys<"connexion" | "alertTitle" | "contactSupport" | "alertText">()(
+  "ErrorPages",
+);
 
 export type I18n = typeof i18n;

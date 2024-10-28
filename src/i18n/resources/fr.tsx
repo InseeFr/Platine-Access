@@ -256,28 +256,8 @@ export const translations: Translations<"fr"> = {
   ErrorPages: {
     "connexion": "Connexion",
     "alertTitle": "Accès à l'enquête impossible",
-    description: ({ message, surveyId }: { message: string; surveyId: string }) => {
-      return (
-        <p className="fr-text--sm">
-          {message}
-          <br />
-          Si vous pensez qu'il s'agit d'une erreur, veuillez
-          <Button
-            className="fr-pl-1v fr-text--sm"
-            style={{ padding: 0, display: "inline", textDecoration: "underline", fontWeight: "400" }}
-            priority="tertiary no outline"
-            linkProps={{
-              to: "/$survey/contacter-assistance",
-              params: {
-                survey: surveyId,
-              },
-            }}
-          >
-            contacter l'assistance
-          </Button>
-        </p>
-      );
-    },
+    "contactSupport": "contacter l'assistance",
+    "alertText": " Si vous pensez qu'il s'agit d'une erreur, veuillez",
   },
   EmailForm: {
     "connexion": "Connexion",
