@@ -15,7 +15,7 @@ function ForgotPasswordPage() {
   return (
     <div>
       <Helmet>
-        <title>{`${t("pageTitle")} - ${headerTranslation("service tagline")}`}</title>
+        <title>{`${t("pageTitleForgotPassword")} - ${headerTranslation("service tagline")}`}</title>
       </Helmet>
       <ForgotPassword surveyId={survey} />
     </div>
