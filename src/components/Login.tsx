@@ -4,6 +4,7 @@ import { Navigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Loading } from "./surveyHomepage/Loading";
 import { TechnicalError } from "./errorPages/TechnicalError";
+import { Ineligible, Unauthorized } from "./errorPages/ErrorPages";
 
 export const Login = ({ surveyData }: { surveyData: ContentSurvey }) => {
   const { data: questioningUrlData, isLoading, error } = useFetchQueryPortail("/questionnaires-url");
@@ -25,7 +26,7 @@ export const Login = ({ surveyData }: { surveyData: ContentSurvey }) => {
 
   if (error) {
     if (error.status === 401 || error.status === 403 || error.status === 404) {
-      return <>unauthorized</>;
+      return <Unauthorized surveyId={surveyData.id} />;
     } else {
       return <TechnicalError surveyId={surveyData.id} />;
     }
@@ -39,6 +40,6 @@ export const Login = ({ surveyData }: { surveyData: ContentSurvey }) => {
   ) {
     return <Navigate to={"/$survey/repondant/mail"} params={{ survey: surveyData.id }} />;
   } else {
-    return <>Ineligible</>;
+    return <Ineligible surveyId={surveyData.id} />;
   }
 };

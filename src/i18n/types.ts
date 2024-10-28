@@ -27,6 +27,7 @@ export type ComponentKey =
   | import("components/LegalInformation").I18n
   | import("components/errorPages/NotFound").I18n
   | import("components/errorPages/TechnicalError").I18n
+  | import("components/errorPages/ErrorPages").I18n
   | import("components/EmailForm").I18n;
 
 export type Translations<L extends Language> = GenericTranslations<

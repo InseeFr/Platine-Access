@@ -252,6 +252,32 @@ export const translations: Translations<"en"> = {
     "supportInformation": "If you need immediate assistance, please contact us.",
     "buttonLabel": "Contact Us",
   },
+  ErrorPages: {
+    "connexion": "Login",
+    "alertTitle": "Survey Access Unavailable",
+    description: ({ message, surveyId }: { message: string; surveyId: string }) => {
+      return (
+        <p className="fr-text--sm">
+          {message}
+          <br />
+          If you believe this is an error, please
+          <Button
+            className="fr-pl-1v fr-text--sm"
+            style={{ padding: 0, display: "inline", textDecoration: "underline", fontWeight: "400" }}
+            priority="tertiary no outline"
+            linkProps={{
+              to: "/$survey/contacter-assistance",
+              params: {
+                survey: surveyId,
+              },
+            }}
+          >
+            contact support
+          </Button>
+        </p>
+      );
+    },
+  },
   EmailForm: {
     "connexion": "Log in",
     "contactDetailsInformation":
