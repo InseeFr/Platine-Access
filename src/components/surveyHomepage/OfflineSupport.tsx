@@ -4,8 +4,15 @@ import { SupportForm } from "./SupportForm";
 import { useFetchMutationWithoutAuth } from "hooks/useFetchQuery";
 import { Navigate } from "@tanstack/react-router";
 
-export const OfflineSupport = ({ surveyId }: { surveyId: string }) => {
-  const { register, handleSubmit, errors } = useForm(supportSchema);
+export const OfflineSupport = ({
+  surveyId,
+  isFromForgotPassword = false,
+}: {
+  surveyId: string;
+  isFromForgotPassword?: boolean;
+}) => {
+  const defaultValues = isFromForgotPassword ? { mailObjet: "perteMotDePasse" } : {};
+  const { register, handleSubmit, errors } = useForm(supportSchema, { defaultValues: defaultValues });
 
   const { mutateAsync, isSuccess, isError } = useFetchMutationWithoutAuth("/e-mail", "post");
 

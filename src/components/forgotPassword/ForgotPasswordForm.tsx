@@ -57,6 +57,9 @@ export const ForgotPasswordForm = ({ surveyId, onSubmit, register, errors }: Pro
             params: {
               survey: surveyId,
             },
+            search: {
+              "mot-de-passe-oublie": true,
+            },
           }}
         >
           {t("contactSupport")}
