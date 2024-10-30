@@ -1,12 +1,36 @@
-FROM nginx
+FROM nginx:stable-alpine
+
+## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 
-ADD build /usr/share/nginx/html
+#Add build to nginx root webapp
+ADD dist /usr/share/nginx/html
+
+#Copy nginx configuration
 RUN rm etc/nginx/conf.d/default.conf
-COPY nginx.conf etc/nginx/conf.d/
+COPY container/nginx.conf etc/nginx/conf.d/
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
-ENTRYPOINT [ "/entrypoint.sh" ]
 
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /usr/share/nginx/html
+
+# Add bash
+RUN apk add --no-cache bash
+
+# COPY scripts/env.sh .
+# COPY scripts/.env .
+
+# Make our shell script executable
+# RUN chmod +x env.sh
+
+# add non-root user
+RUN touch /var/run/nginx.pid
+RUN chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
+
+# non root users cannot listen on 80
+EXPOSE 8080
+
+USER nginx
+
+# Start Nginx server
+ENTRYPOINT sh -c "./vite-envs.sh && nginx -g 'daemon off;'"
+RUN chmod +x vite-envs.sh
