@@ -149,7 +149,6 @@ const SideMenuCustom = ({
       linkProps: {
         to: "/$survey/introduction",
         params: { survey: surveyId },
-        resetScroll: false,
       },
       text: t("survey introduction"),
     },
@@ -159,7 +158,6 @@ const SideMenuCustom = ({
         params: {
           survey: surveyId,
         },
-        resetScroll: false,
       },
       text: t("legal framework"),
     },
@@ -169,7 +167,6 @@ const SideMenuCustom = ({
         params: {
           survey: surveyId,
         },
-        resetScroll: false,
       },
       text: t("what are your answers for?"),
     },
@@ -179,7 +176,6 @@ const SideMenuCustom = ({
         params: {
           survey: surveyId,
         },
-        resetScroll: false,
       },
       text: t("documents to the surveyed"),
     },
@@ -189,7 +185,6 @@ const SideMenuCustom = ({
         params: {
           survey: surveyId,
         },
-        resetScroll: false,
       },
       text: t("some results"),
     },
@@ -199,7 +194,6 @@ const SideMenuCustom = ({
         params: {
           survey: surveyId,
         },
-        resetScroll: false,
       },
       text: supportTranslation("FAQ"),
     },
@@ -218,7 +212,9 @@ const SideMenuCustom = ({
         items={
           isSurveyOnline
             ? [
-                ...sideMenuItems,
+                ...sideMenuItems.map(item => {
+                  return { ...item, linkProps: { ...item.linkProps, resetScroll: false } };
+                }),
                 {
                   linkProps: {
                     to: "/$survey/contacter-assistance",
