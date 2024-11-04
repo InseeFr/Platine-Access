@@ -1,36 +1,21 @@
-FROM nginx:stable-alpine
+FROM nginxinc/nginx-unprivileged:1.27-alpine
 
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
+# Non root user
+ENV NGINX_USER_ID=101
+ENV NGINX_GROUP_ID=101
+ENV NGINX_USER=nginx
 
-#Add build to nginx root webapp
-ADD dist /usr/share/nginx/html
+USER $NGINX_USER_ID
 
-#Copy nginx configuration
+# Add build to nginx root webapp
+COPY --chown=$NGINX_USER:$NGINX_USER dist /usr/share/nginx/html
+
+# Copy nginx configuration
 RUN rm etc/nginx/conf.d/default.conf
-COPY container/nginx.conf etc/nginx/conf.d/
+COPY --chown=$NGINX_USER:$NGINX_USER container/nginx.conf etc/nginx/conf.d/
+RUN chmod 755 /usr/share/nginx/html/vite-envs.sh
 
-
-WORKDIR /usr/share/nginx/html
-
-# Add bash
-RUN apk add --no-cache bash
-
-# COPY scripts/env.sh .
-# COPY scripts/.env .
-
-# Make our shell script executable
-# RUN chmod +x env.sh
-
-# add non-root user
-RUN touch /var/run/nginx.pid
-RUN chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
-
-# non root users cannot listen on 80
+USER $NGINX_USER_ID
 EXPOSE 8080
 
-USER nginx
-
-# Start Nginx server
-ENTRYPOINT sh -c "./vite-envs.sh && nginx -g 'daemon off;'"
-RUN chmod +x vite-envs.sh
+ENTRYPOINT sh -c "/usr/share/nginx/html/vite-envs.sh && nginx -g 'daemon off;'"
