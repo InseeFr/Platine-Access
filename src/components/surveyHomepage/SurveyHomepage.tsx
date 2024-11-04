@@ -199,6 +199,10 @@ const SideMenuCustom = ({
     },
   ];
 
+  const sideMenuItemsWithoutScroll = sideMenuItems.map(item => {
+    return { ...item, linkProps: { ...item.linkProps, resetScroll: false } };
+  });
+
   return (
     <>
       <label className="fr-sr-only" id={`${labelId}-title`}>
@@ -212,9 +216,7 @@ const SideMenuCustom = ({
         items={
           isSurveyOnline
             ? [
-                ...sideMenuItems.map(item => {
-                  return { ...item, linkProps: { ...item.linkProps, resetScroll: false } };
-                }),
+                ...sideMenuItemsWithoutScroll,
                 {
                   linkProps: {
                     to: "/$survey/contacter-assistance",
@@ -226,7 +228,7 @@ const SideMenuCustom = ({
                   text: supportTranslation("contact support"),
                 },
               ]
-            : sideMenuItems
+            : sideMenuItemsWithoutScroll
         }
       />
     </>
