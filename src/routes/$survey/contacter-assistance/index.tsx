@@ -3,7 +3,7 @@ import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { OfflineSupport } from "components/surveyHomepage/OfflineSupport";
 import { useTranslation } from "i18n";
 
-type SupportSearch = {
+export type SupportSearch = {
   "mot-de-passe-oublie"?: boolean;
 };
 
@@ -24,7 +24,7 @@ function SupportIndex() {
   return (
     <section className={fr.cx("fr-col-12", "fr-col-md-6", "fr-pr-md-4w")}>
       <h3>{t("contact support")}</h3>
-      <OfflineSupport surveyId={survey} isFromForgotPassword={search["mot-de-passe-oublie"]} />
+      <OfflineSupport surveyId={survey} searchParams={search} />
     </section>
   );
 }
