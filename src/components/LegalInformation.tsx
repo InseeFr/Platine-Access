@@ -20,6 +20,7 @@ export function LegalInformation() {
       <TitleWithText title={t("servicePresentationTitle")} text={t("servicePresentationText")} />
       <TitleWithText title={t("legalFrameworkTitle")} text={t("legalFrameworkText")} />
       <TitleWithText title={t("cookiesTitle")} text={t("cookiesText")} />
+      <TitleWithText title={t("trackingTitle")} text={t("trackingText")} />
       <TitleWithText title={t("copyrightTitle")} text={t("copyrightText")} />
 
       <div aria-label={t("publisherInformationTitle")} className="fr-pb-3w">
@@ -41,6 +42,8 @@ const { i18n } = declareComponentKeys<
   | "legalFrameworkText"
   | "cookiesTitle"
   | "cookiesText"
+  | "trackingTitle"
+  | "trackingText"
   | "copyrightTitle"
   | "copyrightText"
   | "publisherInformationTitle"
