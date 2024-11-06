@@ -21,6 +21,8 @@ export function LegalInformation() {
       <TitleWithText title={t("legalFrameworkTitle")} text={t("legalFrameworkText")} />
       <TitleWithText title={t("cookiesTitle")} text={t("cookiesText")} />
       <TitleWithText title={t("trackingTitle")} text={t("trackingText")} />
+      <div id="matomo-opt-out"></div>
+     
       <TitleWithText title={t("copyrightTitle")} text={t("copyrightText")} />
 
       <div aria-label={t("publisherInformationTitle")} className="fr-pb-3w">
