@@ -2,6 +2,7 @@ import { declareComponentKeys } from "i18nifty/declareComponentKeys";
 import { useTranslation } from "i18n";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { TitleWithText } from "./commons/TitleWithText";
+import { MatomoOptOut } from "./MatomoOptOut";
 
 export function LegalInformation() {
   const { t } = useTranslation("LegalInformation");
@@ -21,7 +22,8 @@ export function LegalInformation() {
       <TitleWithText title={t("legalFrameworkTitle")} text={t("legalFrameworkText")} />
       <TitleWithText title={t("cookiesTitle")} text={t("cookiesText")} />
       <TitleWithText title={t("trackingTitle")} text={t("trackingText")} />
-      <div id="matomo-opt-out"></div>
+      <MatomoOptOut />
+            
      
       <TitleWithText title={t("copyrightTitle")} text={t("copyrightText")} />
 
