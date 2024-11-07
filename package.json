@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.9.14",
+    "@datapunt/matomo-tracker-react": "^0.5.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@hookform/resolvers": "^3.6.0",

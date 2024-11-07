@@ -31,6 +31,8 @@
                 var _paq = window._paq = window._paq || [];
                 _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
                 _paq.push(['HeatmapSessionRecording::disable']);
+                _paq.push(['trackPageView']);
+                _paq.push(['enableLinkTracking']);
                 (function() {
                 var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
                 g.async=true; g.src=matomoURL; s.parentNode.insertBefore(g,s);
