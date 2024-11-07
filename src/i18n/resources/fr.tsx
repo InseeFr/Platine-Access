@@ -227,6 +227,8 @@ export const translations: Translations<"fr"> = {
     "cookiesTitle": "Gestion des cookies",
     "cookiesText":
       "Ce portail n’utilise aucun cookie nécessitant un consentement des usagers. C’est pourquoi vous n’avez pas à accepter leur utilisation avant de poursuivre votre navigation.",
+    "trackingTitle": "Suivi d'audience",
+    "trackingText": "L’Insee assure la mesure de l’audience sur ce site à l’aide de la solution Matomo. Cet outil de suivi de trafic est recommandé par la Cnil (Commission Nationale de l'Informatique et des Libertés, France) et a été configuré pour respecter les préconisations de celle-ci. Il est particulièrement protecteur de vos données personnelles. Celles-ci ne sont accessibles que par l’Insee et ne sont pas transmises à une entreprise extérieure (y compris Matomo). Votre IP est anonymisée et vos informations supprimées après 13 mois. Tel que configuré sur ce site, le suivi d’audience ne requiert pas de consentement a priori, mais vous pouvez choisir de le désactiver en décochant la case ci-dessous.",
     "copyrightTitle": "Copyright",
     "copyrightText":
       "Toute reproduction pour un usage autre que strictement privé des marques et logos affichés sur le présent site est rigoureusement interdite.",

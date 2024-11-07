@@ -1,12 +1,21 @@
-FROM nginx
-RUN rm -rf /usr/share/nginx/html/*
+FROM nginxinc/nginx-unprivileged:1.27-alpine
 
-ADD build /usr/share/nginx/html
+# Non root user
+ENV NGINX_USER_ID=101
+ENV NGINX_GROUP_ID=101
+ENV NGINX_USER=nginx
+
+USER $NGINX_USER_ID
+
+# Add build to nginx root webapp
+COPY --chown=$NGINX_USER:$NGINX_USER dist /usr/share/nginx/html
+
+# Copy nginx configuration
 RUN rm etc/nginx/conf.d/default.conf
-COPY nginx.conf etc/nginx/conf.d/
+COPY --chown=$NGINX_USER:$NGINX_USER container/nginx.conf etc/nginx/conf.d/
+RUN chmod 755 /usr/share/nginx/html/vite-envs.sh
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
-ENTRYPOINT [ "/entrypoint.sh" ]
+USER $NGINX_USER_ID
+EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT sh -c "/usr/share/nginx/html/vite-envs.sh && nginx -g 'daemon off;'"

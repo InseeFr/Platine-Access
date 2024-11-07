@@ -227,6 +227,8 @@ export const translations: Translations<"en"> = {
     "cookiesTitle": "Cookie Management",
     "cookiesText":
       "This portal does not use any cookies that require user consent. Therefore, you do not need to accept their use before continuing your browsing.",
+    "trackingTitle": "Audience Tracking",
+    "trackingText": "The Insee ensures the measurement of the audience on this site using the Matomo solution. This traffic tracking tool is recommended by the CNIL (National Commission on Informatics and Liberty, France) and has been configured to comply with its recommendations. It is particularly protective of your personal data. This data is only accessible to Insee and is not shared with any external company (including Matomo). Your IP is anonymized, and your information is deleted after 13 months. As configured on this site, audience tracking does not require prior consent, but you can choose to disable it by unchecking the box below.",
     "copyrightTitle": "Copyright",
     "copyrightText":
       "Any reproduction of trademarks and logos displayed on this site for purposes other than strictly private is strictly prohibited.",
