@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Chatbot } from "components/Chatbox";
+import { Chatbot } from "components/Chatbot";
 import { ForgotPassword } from "components/forgotPassword/ForgotPassword";
 import { useTranslation } from "i18n";
 import { Helmet } from "react-helmet-async";
