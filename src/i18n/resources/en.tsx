@@ -141,10 +141,7 @@ export const translations: Translations<"en"> = {
   Logout: {
     "title": "You have been disconnected.",
     "disconnected": "Disconnected",
-    "answer saved":
-      "Your answers have been saved, so you can complete your questionnaire at a later date.",
-    "send message warning":
-      "Don't forget to send in your questionnaire once it has been fully completed.",
+    "logout text": "Please log in again to access your surveys.",
     "reconnect": "Reconnect",
   },
   Support: {
@@ -168,7 +165,7 @@ export const translations: Translations<"en"> = {
             style={{ padding: 0, display: "inline", textDecoration: "underline", fontWeight: "400" }}
             priority="tertiary no outline"
             linkProps={{
-              to: "/$survey/faq",
+              to: "/mes-enquetes/$survey/faq",
               params: {
                 survey: surveyId,
               },
@@ -431,6 +428,27 @@ export const translations: Translations<"en"> = {
   },
   Chatbot: {
     "title": "Surveys portal",
+  },
+  HomePage: {
+    "portalTitle": "Welcome to the response portal for public statistics surveys",
+    "portalDescription":
+      "Insee conducts surveys every year with individuals and businesses. By responding, you enable the production of reliable information, helping to inform public debate.",
+    "authenticationTitle":
+      "Have you received login credentials by email or mail to respond to a survey?",
+    "authenticationDescription":
+      "You have been randomly selected to participate in a survey and respond online. Please have your login credentials and password ready to connect and respond to the survey.",
+    "authenticationButton": "Log in",
+    "activitiesTitle": "The activities of public statistics",
+    "activitiesDescription":
+      "Insee collects, produces, analyzes, and disseminates statistical information on the economy, society, and French territories.",
+    "activitiesCollect": "Collect",
+    "activitiesAnalyze": "Analyze",
+    "activitiesDiffuse": "Diffuse",
+    "confidentialityTitle": "Insee is bound by statistical confidentiality",
+    "confidentialityDescription":
+      "Statistical confidentiality strictly prohibits the communication of individual data or any data that could identify respondents. It ensures the reliability of statistics, whether derived from surveys or databases.",
+    "LearnMore": "Learn more",
+    "pageTitle": "Home",
   },
   /* spell-checker: enable */
 };

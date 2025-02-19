@@ -3,7 +3,7 @@ type Props = {
   text: string;
 };
 
-export const TitleWithText = ({ title, text }: Props) => {
+export const H3TitleWithText = ({ title, text }: Props) => {
   return (
     <div>
       <h3 className="fr-mb-2w">{title}</h3>

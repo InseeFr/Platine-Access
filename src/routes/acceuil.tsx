@@ -1,21 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HomePage } from "components/homePage/HomePage";
 import { useTranslation } from "i18n";
 import { Helmet } from "react-helmet-async";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/acceuil")({
   component: Index,
 });
 
 function Index() {
-  const { t } = useTranslation("SurveyHomepage");
   const { t: headerTranslation } = useTranslation("Header");
+  const { t } = useTranslation("HomePage");
 
   return (
     <div>
       <Helmet>
-        <title>{`${t("homepage")} - ${headerTranslation("service tagline")}`}</title>
+        <title>{`${t("pageTitle")} - ${headerTranslation("service tagline")}`} </title>
       </Helmet>
-      <div className="fr-container ">{/* TODO: add homepage */}</div>
+      <HomePage></HomePage>
     </div>
   );
 }

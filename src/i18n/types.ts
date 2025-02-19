@@ -22,7 +22,7 @@ export type ComponentKey =
   | import("components/myAccount/PersonalInformations").I18n
   | import("components/myAccount/PostalAddressInformations").I18n
   | import("components/surveyHomepage/Faq").I18n
-  | import("../routes/$survey/documents").I18n
+  | import("../routes/mes-enquetes/$survey/documents").I18n
   | import("components/surveyHomepage/SupportForm").I18n
   | import("components/LegalInformation").I18n
   | import("components/errorPages/NotFound").I18n
@@ -33,7 +33,8 @@ export type ComponentKey =
   | import("components/Accessibility").I18n
   | import("components/Security").I18n
   | import("components/PersonalData").I18n
-  | import("components/Chatbot").I18n;
+  | import("components/Chatbot").I18n
+  | import("components/homePage/HomePage").I18n;
 
 export type Translations<L extends Language> = GenericTranslations<
   ComponentKey,
