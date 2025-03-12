@@ -8,15 +8,8 @@ import { useEffect } from "react";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import { unknownEmailForm } from "types/schemas";
 import { Schema, z } from "zod";
-import { TechnicalError } from "./errorPages/TechnicalError";
 
-export const UnknownEmailForm = ({
-  questioningUrl,
-  surveyId,
-}: {
-  questioningUrl?: string;
-  surveyId: string;
-}) => {
+export const UnknownEmailForm = ({ questioningUrl }: { questioningUrl?: string }) => {
   const { t } = useTranslation("EmailForm");
   const navigate = useNavigate();
   const { t: supportFormTranslation } = useTranslation("SupportForm");
@@ -25,23 +18,19 @@ export const UnknownEmailForm = ({
   const { mutateAsync, isSuccess, isError } = useFetchMutationPortail("/repondant/mail", "put");
 
   useEffect(() => {
-    if (isSuccess && questioningUrl) {
+    if ((isSuccess || isError) && questioningUrl) {
       window.location.href = questioningUrl;
     }
-    if (isSuccess && !questioningUrl) {
+    if ((isSuccess || isError) && !questioningUrl) {
       navigate({ to: "/" });
     }
-  }, [isSuccess]);
+  }, [isSuccess, isError]);
 
   const onSubmit = handleSubmit(data => {
     mutateAsync({
       body: data.mailaddress,
     });
   });
-
-  if (isError) {
-    return <TechnicalError surveyId={surveyId} />;
-  }
 
   return (
     <div>

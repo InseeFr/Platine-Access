@@ -25,9 +25,9 @@ export const EmailForm = ({ surveyId, titleShort }: { surveyId: string; titleSho
   return (
     <PageWithCardContainer currentPageLabel={t("connexion")} surveyId={surveyId} titleShort={titleShort}>
       {unknownEmail ? (
-        <UnknownEmailForm questioningUrl={questioningUrl} surveyId={surveyId} />
+        <UnknownEmailForm questioningUrl={questioningUrl} />
       ) : (
-        <KnownEmailForm questioningUrl={questioningUrl} surveyId={surveyId} email={emailData.mail!} />
+        <KnownEmailForm questioningUrl={questioningUrl} email={emailData.mail!} />
       )}
       <Divider orientation="horizontal" variant="fullWidth" className="fr-p-0 fr-my-3w" />
       <p>{t("contactDetailsInformation")}</p>
