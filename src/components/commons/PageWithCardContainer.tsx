@@ -30,13 +30,13 @@ export const PageWithCardContainer = ({ children, titleShort, surveyId, currentP
       />
       <div id="content" className="fr-grid-row fr-grid-row--center ">
         <div
-          className="fr-col-md-10 fr-col-lg-7 fr-col-12 fr-mt-3w fr-mb-3w "
+          className="fr-col-md-8 fr-col-lg-6 fr-col-12 fr-mt-3w fr-mb-3w "
           style={{
             backgroundColor: fr.colors.decisions.background.default.grey.hover,
           }}
         >
           <div className="fr-grid-row  fr-grid-row--center fr-py-md-7w fr-py-3w">
-            <div className="fr-col-11 fr-col-md-9 ">{children}</div>
+            <div className="fr-col-12 fr-col-md-10 fr-col-lg-8">{children}</div>
           </div>
         </div>
       </div>
